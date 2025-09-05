@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GitHub PR Cheat Sheet - Dark Mode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+        background: #16181c;
+        color: #e3e7ef;
+        font-family: 'Segoe UI', 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif;
+        font-size: 16px;
+        margin: 0;
+        padding: 20px 10vw;
+        line-height: 1.6;
+    }
+    h1, h2, h3 {
+        color: #9fc9ff;
+        font-weight: bold;
+        margin-top: 1.5em;
+    }
+    h1 { border-bottom: 1px solid #383c50; padding-bottom: 0.3em; }
+    hr { border: none; border-bottom: 1px solid #313347; margin: 2em 0; }
+    pre, code {
+        font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+        background: #202235;
+        color: #e7f5ff;
+        border-radius: 5px;
+    }
+    pre {
+        padding: 14px;
+        overflow-x: auto;
+        margin: 1em 0;
+        border: 1px solid #37415c;
+    }
+    code {
+        padding: 2px 6px;
+        font-size: 95%;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background: #191b22;
+        margin-bottom: 2em;
+    }
+    th, td {
+        border: 1px solid #3a415c;
+        padding: 8px 10px;
+        text-align: left;
+    }
+    th {
+        background: #22243a;
+        color: #74c0fc;
+        font-weight: bold;
+    }
+    tr:nth-child(even) td {
+        background: #222431;
+    }
+    blockquote {
+        border-left: 5px solid #364fc7;
+        margin: 1.5em 0;
+        padding: 0.5em 1em;
+        background: #1e2234;
+        color: #b2c6ec;
+        font-style: italic;
+    }
+    ul, ol {
+        margin: 1em 0 1em 2.5em;
+    }
+    a      { color: #74c0fc; }
+    a:visited { color: #a5d8ff; }
+    a:hover   { text-decoration: underline; }
+    @media (max-width: 700px) {
+        html, body { padding: 8px 2vw; font-size: 15px; }
+        table, th, td { font-size: 94%; }
+    }
+  </style>
+</head>
+<body>
+<h1>GitHub Pull Request Cheat Sheet</h1>
+
+<h2>Step-by-Step Guide</h2>
+
+<h3>1. Fork and Clone (for external contributions)</h3>
+<pre><code># Fork via GitHub web UI, then:
+git clone https://github.com/&lt;your-username&gt;/&lt;repo-name&gt;.git
+cd &lt;repo-name&gt;
+</code></pre>
+<p><em>If working in your org’s repo, just clone as usual.</em></p>
+
+<h3>2. Add Upstream Remote (if contributing externally)</h3>
+<pre><code>git remote add upstream https://github.com/&lt;original-owner&gt;/&lt;repo-name&gt;.git
+# To sync later:
+git fetch upstream
+git rebase upstream/main   # (or main/master)
+</code></pre>
+
+<h3>3. Create a Feature Branch</h3>
+<pre><code>git checkout -b my-feature-branch</code></pre>
+<p><em>Example: <code>fix/login-bug</code> or <code>feat/dark-mode-support</code></em></p>
+
+<h3>4. Make, Add, and Commit Changes</h3>
+<pre><code># Make edits, then:
+git add .
+git commit -m "Clear and concise commit message"
+</code></pre>
+
+<h3>5. Sync Your Branch (before pushing) <span style="color:#6ea8fe">(recommended)</span></h3>
+<pre><code>git fetch upstream
+git rebase upstream/main
+</code></pre>
+<p><em>Resolve any conflicts locally before pushing.</em></p>
+
+<h3>6. Push Your Branch to GitHub</h3>
+<pre><code>git push origin my-feature-branch</code></pre>
+
+<h3>7. Open a Pull Request (PR) on GitHub</h3>
+<ul>
+  <li>Go to your repo on GitHub.</li>
+  <li>Click <strong>Compare &amp; pull request</strong> or use the <strong>Pull Requests</strong> tab.</li>
+  <li>Set <strong>base</strong> (upstream <code>main</code> or <code>dev</code>) and <strong>compare</strong> (your branch).</li>
+  <li>Add a clear <strong>Title</strong> and <strong>Description</strong> (link issues: <code>Fixes #123</code>).</li>
+  <li>Assign reviewers/labels if needed, or mark as Draft if not ready.</li>
+</ul>
+
+<h3>8. Respond to Reviews</h3>
+<ul>
+  <li>Address requested changes; push new commits or rebase as needed.</li>
+  <li>Revise PR description if scope changes.</li>
+</ul>
+
+<hr>
+<h2>Quick Reference Table</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Command or Action</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Fork repo</td><td>GitHub: <strong>Fork</strong> (if external)</td></tr>
+<tr><td>Clone repo</td><td><code>git clone &lt;url&gt;</code></td></tr>
+<tr><td>Add upstream</td><td><code>git remote add upstream &lt;upstream-url&gt;</code></td></tr>
+<tr><td>Create branch</td><td><code>git checkout -b my-feature-branch</code></td></tr>
+<tr><td>Edit/commit</td><td><code>git add .</code><br><code>git commit -m "summary"</code></td></tr>
+<tr><td>Sync (rebase)</td><td><code>git fetch upstream</code><br><code>git rebase upstream/main</code></td></tr>
+<tr><td>Push branch</td><td><code>git push origin my-feature-branch</code></td></tr>
+<tr><td>Open PR</td><td>GitHub: pull request from your branch into target branch</td></tr>
+<tr><td>Respond/rebase</td><td>Rebase, address feedback, force push if rebased</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Pull Request Best Practices</h2>
+<ul>
+  <li><strong>One feature or fix per PR</strong> (no mixed changes).</li>
+  <li><strong>Clear titles and descriptions</strong>; use <code>Fixes #123</code> to link issues.</li>
+  <li>Proofread all messages; build and test before pushing.</li>
+  <li>Update/add tests as needed.</li>
+  <li>Follow project conventions and naming patterns.</li>
+  <li>Engage on feedback; keep your branch up to date.</li>
+</ul>
+
+<hr>
+<h2>Optional: GitHub CLI PR (for terminal junkies)</h2>
+<pre><code>gh pr create --base main --head my-feature-branch --fill
+</code></pre>
+
+<hr>
+
+<h2>Sample PR Description Skeleton</h2>
+<pre><code>### What does this PR do?
+- Concise description
+
+### Why is it needed?
+- Context, issue links, or rationale
+
+### How was it tested?
+- New/existing tests, CI runs, local build, etc.
+
+### Notes for reviewers
+- Anything special to watch for?
+</code></pre>
+</body>
+</html>
